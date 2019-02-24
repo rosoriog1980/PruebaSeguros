@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="06abcd3c3522429c802ddf957cf03fe9" Name="Diagram1">
+        <EntityTypeShape EntityType="PolizasDBModel.Cubrimiento" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PolizasDBModel.Poliza" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PolizasDBModel.Riesgo" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PolizasDBModel.PolizaCoberturas" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <AssociationConnector Association="PolizasDBModel.FK_PolizaCoberturas_Cubrimiento" ManuallyRouted="false" />
+        <AssociationConnector Association="PolizasDBModel.FK_Poliza_Riesgo" ManuallyRouted="false" />
+        <AssociationConnector Association="PolizasDBModel.FK_PolizaCoberturas_Poliza" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
