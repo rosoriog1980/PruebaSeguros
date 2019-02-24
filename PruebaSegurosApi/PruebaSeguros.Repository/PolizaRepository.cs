@@ -11,7 +11,7 @@ namespace PruebaSeguros.Repository
     {
         public Entities.Poliza GetPoliza(int id)
         {
-            using (PolizasDBEntities1 context = new PolizasDBEntities1())
+            using (PolizasDBEntities context = new PolizasDBEntities())
             {
                 var p =  context.Poliza.FirstOrDefault(x => x.PolizaId == id);
 
@@ -36,7 +36,7 @@ namespace PruebaSeguros.Repository
 
         public List<Entities.Poliza> GetPolizas()
         {
-            using (PolizasDBEntities1 context = new PolizasDBEntities1())
+            using (PolizasDBEntities context = new PolizasDBEntities())
             {
                 return context.Poliza.Select(x => new Entities.Poliza {
                     PolizaId = x.PolizaId,
@@ -56,5 +56,44 @@ namespace PruebaSeguros.Repository
                 }).ToList();
             }
         }
+
+        public int InsertPoliza(Entities.Poliza poliza)
+        {
+            try
+            {
+
+                using (PolizasDBEntities context = new PolizasDBEntities())
+                {
+                    Poliza _poliza = new Poliza();
+                    _poliza.PolizaId = context.Poliza.Max(x => x.PolizaId) + 1;
+                    _poliza.PolizaNombre = poliza.PolizaNombre;
+                    _poliza.PolizaDescripcion = poliza.PolizaDescripcion;
+                    _poliza.PolizaInicio = poliza.PolizaInicio;
+                    _poliza.PolizaPeriodoCobertura = poliza.PolizaPeriodoCobertura;
+                    _poliza.PolizaPrecio = poliza.PolizaPrecio;
+                    _poliza.PolizaRiesgo = poliza.PolizaRiesgo;
+
+                    context.Poliza.Add(_poliza);
+
+                    foreach (var item in poliza.PolizaCubrimientos)
+                    {
+                        context.PolizaCoberturas.Add(new PolizaCoberturas
+                        {
+                            PolizaId = _poliza.PolizaId,
+                            CoberturaId = item.CubrimientoId,
+                            Porcentaje = item.Porcentaje
+                        });
+                    }
+
+                    context.SaveChanges();
+                    return _poliza.PolizaId;
+                }
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
+        }
+        
     }
 }

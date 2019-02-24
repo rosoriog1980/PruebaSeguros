@@ -14,6 +14,7 @@ namespace PruebaSeguros.Repository
     
     public partial class PolizaCoberturas
     {
+        public int Id { get; set; }
         public int PolizaId { get; set; }
         public int CoberturaId { get; set; }
         public int Porcentaje { get; set; }

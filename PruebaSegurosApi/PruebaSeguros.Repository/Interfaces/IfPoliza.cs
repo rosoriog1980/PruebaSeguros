@@ -12,5 +12,6 @@ namespace PruebaSeguros.Repository.Interfaces
     {
         List<Entities.Poliza> GetPolizas();
         Entities.Poliza GetPoliza(int id);
+        int InsertPoliza(Entities.Poliza poliza);
     }
 }

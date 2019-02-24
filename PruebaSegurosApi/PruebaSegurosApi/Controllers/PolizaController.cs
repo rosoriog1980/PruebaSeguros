@@ -31,8 +31,9 @@ namespace PruebaSegurosApi.Controllers
         }
 
         // POST api/poliza
-        public void Post([FromBody]string value)
+        public int Post([FromBody] Poliza value)
         {
+            return polizaRepository.InsertPoliza(value);
         }
 
         // PUT api/poliza/5

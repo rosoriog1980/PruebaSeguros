@@ -13,10 +13,10 @@ namespace PruebaSeguros.Repository
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class PolizasDBEntities1 : DbContext
+    public partial class PolizasDBEntities : DbContext
     {
-        public PolizasDBEntities1()
-            : base("name=PolizasDBEntities1")
+        public PolizasDBEntities()
+            : base("name=PolizasDBEntities")
         {
         }
     
@@ -27,7 +27,7 @@ namespace PruebaSeguros.Repository
     
         public virtual DbSet<Cubrimiento> Cubrimiento { get; set; }
         public virtual DbSet<Poliza> Poliza { get; set; }
-        public virtual DbSet<Riesgo> Riesgo { get; set; }
         public virtual DbSet<PolizaCoberturas> PolizaCoberturas { get; set; }
+        public virtual DbSet<Riesgo> Riesgo { get; set; }
     }
 }

@@ -24,14 +24,11 @@
           <Property Name="PolizaPrecio" Type="int" Nullable="false" />
           <Property Name="PolizaRiesgo" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'PolizasDB.dbo.PolizaCoberturas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PolizaCoberturas">
           <Key>
-            <PropertyRef Name="PolizaId" />
-            <PropertyRef Name="CoberturaId" />
-            <PropertyRef Name="Porcentaje" />
+            <PropertyRef Name="Id" />
           </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PolizaId" Type="int" Nullable="false" />
           <Property Name="CoberturaId" Type="int" Nullable="false" />
           <Property Name="Porcentaje" Type="int" Nullable="false" />
@@ -82,14 +79,8 @@ advertencia 6002: La tabla o vista 'PolizasDB.dbo.PolizaCoberturas' no tiene def
         <EntityContainer Name="PolizasDBModelStoreContainer">
           <EntitySet Name="Cubrimiento" EntityType="Self.Cubrimiento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Poliza" EntityType="Self.Poliza" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PolizaCoberturas" EntityType="Self.PolizaCoberturas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Riesgo" EntityType="Self.Riesgo" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PolizaCoberturas" EntityType="Self.PolizaCoberturas" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [PolizaCoberturas].[PolizaId] AS [PolizaId], 
-    [PolizaCoberturas].[CoberturaId] AS [CoberturaId], 
-    [PolizaCoberturas].[Porcentaje] AS [Porcentaje]
-    FROM [dbo].[PolizaCoberturas] AS [PolizaCoberturas]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Poliza_Riesgo" Association="Self.FK_Poliza_Riesgo">
             <End Role="Riesgo" EntitySet="Riesgo" />
             <End Role="Poliza" EntitySet="Poliza" />
@@ -130,6 +121,17 @@ advertencia 6002: La tabla o vista 'PolizasDB.dbo.PolizaCoberturas' no tiene def
           <NavigationProperty Name="Riesgo" Relationship="Self.FK_Poliza_Riesgo" FromRole="Poliza" ToRole="Riesgo" />
           <NavigationProperty Name="PolizaCoberturas" Relationship="Self.FK_PolizaCoberturas_Poliza" FromRole="Poliza" ToRole="PolizaCoberturas" />
         </EntityType>
+        <EntityType Name="PolizaCoberturas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PolizaId" Type="Int32" Nullable="false" />
+          <Property Name="CoberturaId" Type="Int32" Nullable="false" />
+          <Property Name="Porcentaje" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cubrimiento" Relationship="Self.FK_PolizaCoberturas_Cubrimiento" FromRole="PolizaCoberturas" ToRole="Cubrimiento" />
+          <NavigationProperty Name="Poliza" Relationship="Self.FK_PolizaCoberturas_Poliza" FromRole="PolizaCoberturas" ToRole="Poliza" />
+        </EntityType>
         <EntityType Name="Riesgo">
           <Key>
             <PropertyRef Name="RiesgoId" />
@@ -137,18 +139,6 @@ advertencia 6002: La tabla o vista 'PolizasDB.dbo.PolizaCoberturas' no tiene def
           <Property Name="RiesgoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RiesgoDescripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Poliza" Relationship="Self.FK_Poliza_Riesgo" FromRole="Riesgo" ToRole="Poliza" />
-        </EntityType>
-        <EntityType Name="PolizaCoberturas">
-          <Key>
-            <PropertyRef Name="PolizaId" />
-            <PropertyRef Name="CoberturaId" />
-            <PropertyRef Name="Porcentaje" />
-          </Key>
-          <Property Name="PolizaId" Type="Int32" Nullable="false" />
-          <Property Name="CoberturaId" Type="Int32" Nullable="false" />
-          <Property Name="Porcentaje" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Cubrimiento" Relationship="Self.FK_PolizaCoberturas_Cubrimiento" FromRole="PolizaCoberturas" ToRole="Cubrimiento" />
-          <NavigationProperty Name="Poliza" Relationship="Self.FK_PolizaCoberturas_Poliza" FromRole="PolizaCoberturas" ToRole="Poliza" />
         </EntityType>
         <Association Name="FK_PolizaCoberturas_Cubrimiento">
           <End Role="Cubrimiento" Type="Self.Cubrimiento" Multiplicity="1" />
@@ -186,11 +176,11 @@ advertencia 6002: La tabla o vista 'PolizasDB.dbo.PolizaCoberturas' no tiene def
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="PolizasDBEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="PolizasDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Cubrimiento" EntityType="Self.Cubrimiento" />
           <EntitySet Name="Poliza" EntityType="Self.Poliza" />
-          <EntitySet Name="Riesgo" EntityType="Self.Riesgo" />
           <EntitySet Name="PolizaCoberturas" EntityType="Self.PolizaCoberturas" />
+          <EntitySet Name="Riesgo" EntityType="Self.Riesgo" />
           <AssociationSet Name="FK_PolizaCoberturas_Cubrimiento" Association="Self.FK_PolizaCoberturas_Cubrimiento">
             <End Role="Cubrimiento" EntitySet="Cubrimiento" />
             <End Role="PolizaCoberturas" EntitySet="PolizaCoberturas" />
@@ -209,7 +199,7 @@ advertencia 6002: La tabla o vista 'PolizasDB.dbo.PolizaCoberturas' no tiene def
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="PolizasDBModelStoreContainer" CdmEntityContainer="PolizasDBEntities1">
+        <EntityContainerMapping StorageEntityContainer="PolizasDBModelStoreContainer" CdmEntityContainer="PolizasDBEntities">
           <EntitySetMapping Name="Cubrimiento">
             <EntityTypeMapping TypeName="PolizasDBModel.Cubrimiento">
               <MappingFragment StoreEntitySet="Cubrimiento">
@@ -231,20 +221,21 @@ advertencia 6002: La tabla o vista 'PolizasDB.dbo.PolizaCoberturas' no tiene def
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PolizaCoberturas">
+            <EntityTypeMapping TypeName="PolizasDBModel.PolizaCoberturas">
+              <MappingFragment StoreEntitySet="PolizaCoberturas">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PolizaId" ColumnName="PolizaId" />
+                <ScalarProperty Name="CoberturaId" ColumnName="CoberturaId" />
+                <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Riesgo">
             <EntityTypeMapping TypeName="PolizasDBModel.Riesgo">
               <MappingFragment StoreEntitySet="Riesgo">
                 <ScalarProperty Name="RiesgoId" ColumnName="RiesgoId" />
                 <ScalarProperty Name="RiesgoDescripcion" ColumnName="RiesgoDescripcion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PolizaCoberturas">
-            <EntityTypeMapping TypeName="PolizasDBModel.PolizaCoberturas">
-              <MappingFragment StoreEntitySet="PolizaCoberturas">
-                <ScalarProperty Name="PolizaId" ColumnName="PolizaId" />
-                <ScalarProperty Name="CoberturaId" ColumnName="CoberturaId" />
-                <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
