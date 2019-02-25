@@ -43,9 +43,9 @@ namespace PruebaSegurosApi.Controllers
             return polizaRepository.UpdatePoliza(value);
         }
 
-        public int Post(OperacionEnum op, [FromBody] Cubrimiento value)
+        public int Post([FromUri]OperacionEnum id, [FromBody] Cubrimiento value)
         {
-            return polizaRepository.CubrimientosProcess(op, value);
+            return polizaRepository.CubrimientosProcess(id, value);
         }
 
         // DELETE api/poliza/5

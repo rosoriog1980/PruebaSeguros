@@ -8,13 +8,15 @@ import { AppComponent } from './app.component';
 import { PolizasComponent } from './polizas/polizas.component';
 import { PolizaDetailComponent } from './poliza-detail/poliza-detail.component';
 import { NuevaPolizaComponent } from './nueva-poliza/nueva-poliza.component';
+import { UpdatePolizaComponent } from './update-poliza/update-poliza.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PolizasComponent,
     PolizaDetailComponent,
-    NuevaPolizaComponent
+    NuevaPolizaComponent,
+    UpdatePolizaComponent
   ],
   imports: [
     BrowserModule,

@@ -38,4 +38,14 @@ export class PolizaService {
     return this.http.delete(`${baseUrl}/poliza/${id}`,httpOptions);
   }
 
+  cubrimientoProcess(cubrimiento: any, op: number): Observable<any>{
+    const body = cubrimiento;
+    return this.http.post(`${baseUrl}/poliza/${op}`, body, httpOptions);
+  }
+
+  updatePoliza(poliza : Poliza): Observable<any>{
+    const body = poliza;
+    return this.http.put(`${baseUrl}/poliza`, body, httpOptions);
+  }
+
 }

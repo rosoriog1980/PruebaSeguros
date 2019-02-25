@@ -45,10 +45,15 @@ export class NuevaPolizaComponent implements OnInit {
   GuardarPoliza(){
     if (this.poliza.PolizaNombre && this.poliza.PolizaDescripcion && this.poliza.PolizaInicio
       && this.poliza.PolizaPeriodoCobertura && this.poliza.PolizaPrecio && this.poliza.PolizaRiesgo) {
-      this.polizaService.insertPoliza(this.poliza)
-      .subscribe(x => {
-        this.router.navigate(['polizas']);
-      });
+        if (this.poliza.PolizaRiesgo == 4 && this.poliza.PolizaCubrimientos.find(x => x.Porcentaje > 50)) {
+          alert("No se puede generar una póliza con cubrimientos superiores al 50% cuando se tiene un riesgo Alto!");
+        } else {
+          this.polizaService.insertPoliza(this.poliza)
+          .subscribe(x => {
+            this.router.navigate(['polizas']);
+          });
+        }
+      
     } else {
       alert("Faltan campos por diligenciar");
     }

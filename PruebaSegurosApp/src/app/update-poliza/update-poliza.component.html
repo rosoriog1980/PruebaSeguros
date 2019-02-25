@@ -1,4 +1,4 @@
-<h2>Póliza  # {{poliza.PolizaId}}</h2>
+<h2>Póliza # {{poliza.polizaId}}</h2>
 <br><br>
 <div>
 <label>Nombre: 
@@ -27,19 +27,32 @@
 </div>
 <div>
   <label>Nivel de Riesgo: 
-    <input type="text" [(ngModel)]="poliza.PolizaRiesgoNombre">
+      <select [(ngModel)]="poliza.PolizaRiesgo">
+        <option *ngFor="let r of Riesgo" value="{{r.id}}">{{r.Nombre}}</option>
+      </select>
   </label>
 </div>
 <h3>Coberturas:</h3>
+<div>
+  <label> Cobertura:
+    <select [(ngModel)]="coberturaId">
+      <option *ngFor="let c of Coberturas" value="{{c.id}}">{{c.Nombre}}</option>
+    </select>
+    <label> %
+      <input type="text" [(ngModel)]="porcentaje">
+    </label>
+  </label>
+  <button (click)="AddCobertura()">Adicionar</button>
+</div>
 <div *ngIf="poliza.PolizaCubrimientos">
   <ul>
     <li *ngFor="let c of poliza.PolizaCubrimientos">
       {{c.cubrimientoDescripcion}}  - Cubrimiento: {{c.porcentaje}}%
+      <button (click)="borrarCobertura(c)">borrar</button>
     </li>
   </ul>
 </div>
 <div>
-  <button (click)="deletePoliza(poliza.PolizaId)">Borrar Póliza</button>
+  <button (click)="GuardarPoliza()">Guardar Póliza</button>
   <button (click)="atras()">Cancelar</button>
-  <button (click)="modificar()">Modificar</button>
 </div>

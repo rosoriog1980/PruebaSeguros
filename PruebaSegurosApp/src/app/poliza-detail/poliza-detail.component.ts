@@ -45,6 +45,9 @@ export class PolizaDetailComponent implements OnInit {
   atras(){
     this.router.navigate(['polizas']);
   }
+  modificar(){
+    this.router.navigate([`actualizar/${this.poliza.PolizaId}`]);
+  }
 
   ngOnInit() {
     this.poliza = new Poliza();
