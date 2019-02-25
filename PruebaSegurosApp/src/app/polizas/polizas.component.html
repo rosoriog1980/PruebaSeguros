@@ -1,0 +1,13 @@
+<h1>Listado de Pólizas</h1>
+<ul class="polizas">
+  <li *ngFor="let p of polizas"
+  [class.selected]="p === selectedPoliza"
+  (click)="onSelect(p)">
+  <a routerLink="/detail/{{p.polizaId}}">
+    <span class="badge">{{p.polizaId}}</span> {{p.polizaNombre}} {{p.polizaDescripcion}}
+  </a>
+  </li>
+</ul>
+<div>
+  <button (click)="goNueva()">Agregar Nueva Póliza</button>
+</div>

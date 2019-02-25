@@ -1,0 +1,57 @@
+<h2>Nueva Póliza</h2>
+<br><br>
+<div>
+<label>Nombre: 
+  <input type="text" [(ngModel)]="poliza.PolizaNombre">
+</label>
+</div>
+<div>
+<label>Descripción: 
+  <input type="text" [(ngModel)]="poliza.PolizaDescripcion">
+</label>
+</div>
+<div>
+<label>Inicio de Vigencia: 
+  <input type="text" [(ngModel)]="poliza.PolizaInicio">
+</label>
+</div>
+<div>
+<label>Periodo de Cobertura (meses): 
+  <input type="text" [(ngModel)]="poliza.PolizaPeriodoCobertura">
+</label>
+</div>
+<div>
+  <label>Precio: 
+    <input type="text" [(ngModel)]="poliza.PolizaPrecio">
+  </label>
+</div>
+<div>
+  <label>Nivel de Riesgo: 
+      <select [(ngModel)]="poliza.PolizaRiesgo">
+        <option *ngFor="let r of Riesgo" value="{{r.id}}">{{r.Nombre}}</option>
+      </select>
+  </label>
+</div>
+<h3>Coberturas:</h3>
+<div>
+  <label> Cobertura:
+    <select [(ngModel)]="coberturaId">
+      <option *ngFor="let c of Coberturas" value="{{c.id}}">{{c.Nombre}}</option>
+    </select>
+    <label> %
+      <input type="text" [(ngModel)]="porcentaje">
+    </label>
+  </label>
+  <button (click)="AddCobertura()">Adicionar</button>
+</div>
+<div *ngIf="poliza.PolizaCubrimientos">
+  <ul>
+    <li *ngFor="let c of poliza.PolizaCubrimientos">
+      {{c.CubrimientoDescripcion}}  - Cubrimiento: {{c.Porcentaje}}%
+    </li>
+  </ul>
+</div>
+<div>
+  <button (click)="GuardarPoliza()">Guardar Póliza</button>
+  <button (click)="atras()">Cancelar</button>
+</div>

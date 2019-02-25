@@ -1,0 +1,40 @@
+<h2>Póliza  # {{poliza.PolizaId}}</h2>
+<br><br>
+<div>
+<label>Nombre: 
+  <input type="text" [(ngModel)]="poliza.PolizaNombre">
+</label>
+</div>
+<div>
+<label>Descripción: 
+  <input type="text" [(ngModel)]="poliza.PolizaDescripcion">
+</label>
+</div>
+<div>
+<label>Inicio de Vigencia: 
+  <input type="text" [(ngModel)]="poliza.PolizaInicio">
+</label>
+</div>
+<div>
+<label>Periodo de Cobertura (meses): 
+  <input type="text" [(ngModel)]="poliza.PolizaPeriodoCobertura">
+</label>
+</div>
+<div>
+  <label>Precio: 
+    <input type="text" [(ngModel)]="poliza.PolizaPrecio">
+  </label>
+</div>
+<div>
+  <label>Nivel de Riesgo: 
+    <input type="text" [(ngModel)]="poliza.PolizaRiesgoNombre">
+  </label>
+</div>
+<h3>Coberturas:</h3>
+<div *ngIf="poliza.PolizaCubrimientos">
+  <ul>
+    <li *ngFor="let c of poliza.PolizaCubrimientos">
+      {{c.cubrimientoDescripcion}}  - Cubrimiento: {{c.porcentaje}}%
+    </li>
+  </ul>
+</div>
