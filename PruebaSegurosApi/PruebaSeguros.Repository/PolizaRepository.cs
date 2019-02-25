@@ -145,6 +145,23 @@ namespace PruebaSeguros.Repository
             }
         }
 
+        public int DeletePoliza(int id)
+        {
+            try
+            {
+                using (PolizasDBEntities context = new PolizasDBEntities())
+                {
+                    var p = context.Poliza.FirstOrDefault(x => x.PolizaId == id);
+                    context.Poliza.Remove(p);
+                    context.SaveChanges();
+                    return id;
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
 
         #region Private Methods
 

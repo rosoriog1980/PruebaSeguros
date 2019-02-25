@@ -34,4 +34,8 @@ export class PolizaService {
     return this.http.post(`${baseUrl}/poliza`, body, httpOptions);
   }
 
+  deletePoliza(id: number): Observable<any>{
+    return this.http.delete(`${baseUrl}/poliza/${id}`,httpOptions);
+  }
+
 }

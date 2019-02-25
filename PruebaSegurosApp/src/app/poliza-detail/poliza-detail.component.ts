@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { PolizaService } from '../poliza.service'
 import { Poliza } from '../polizas/poliza'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-poliza-detail',
@@ -14,7 +15,8 @@ export class PolizaDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private polizaService: PolizaService,
-    private location: Location
+    private location: Location,
+    private router: Router
   ) { }
 
   getPoliza(){
@@ -33,9 +35,22 @@ export class PolizaDetailComponent implements OnInit {
     });
   }
 
+  deletePoliza(id: number){
+    this.polizaService.deletePoliza(id)
+    .subscribe(resul => {
+      this.router.navigate(['polizas']);
+    });
+  }
+
+  atras(){
+    this.router.navigate(['polizas']);
+  }
+
   ngOnInit() {
     this.poliza = new Poliza();
     this.getPoliza();
   }
+
+
 
 }

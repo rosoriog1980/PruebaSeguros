@@ -49,8 +49,9 @@ namespace PruebaSegurosApi.Controllers
         }
 
         // DELETE api/poliza/5
-        public void Delete(int id)
+        public int Delete(int id)
         {
+            return polizaRepository.DeletePoliza(id);
         }
     }
 }

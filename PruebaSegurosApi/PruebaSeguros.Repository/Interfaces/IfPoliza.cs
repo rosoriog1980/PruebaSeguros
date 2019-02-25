@@ -14,6 +14,7 @@ namespace PruebaSeguros.Repository.Interfaces
         Entities.Poliza GetPoliza(int id);
         int InsertPoliza(Entities.Poliza poliza);
         int UpdatePoliza(Entities.Poliza poliza);
+        int DeletePoliza(int id);
 
         int CubrimientosProcess(OperacionEnum op, Entities.Cubrimiento cubrimiento);
     }
