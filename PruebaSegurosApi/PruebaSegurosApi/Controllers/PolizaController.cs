@@ -1,4 +1,5 @@
 ﻿using PruebaSeguros.Entities;
+using PruebaSeguros.Entities.Enum;
 using PruebaSeguros.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -31,14 +32,20 @@ namespace PruebaSegurosApi.Controllers
         }
 
         // POST api/poliza
-        public int Post([FromBody] Poliza value)
+        public int Post([FromBody]Poliza value)
         {
             return polizaRepository.InsertPoliza(value);
         }
 
         // PUT api/poliza/5
-        public void Put(int id, [FromBody]string value)
+        public int Put([FromBody]Poliza value)
         {
+            return polizaRepository.UpdatePoliza(value);
+        }
+
+        public int Post(OperacionEnum op, [FromBody] Cubrimiento value)
+        {
+            return polizaRepository.CubrimientosProcess(op, value);
         }
 
         // DELETE api/poliza/5
